@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -23,5 +25,7 @@ public class Client {
     private Gender gender;
     @Column(name = "birth_date")
     private LocalDate birthDate;
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Workout> workouts = new ArrayList<>();
 }
 
