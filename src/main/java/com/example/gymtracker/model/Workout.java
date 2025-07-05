@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -23,4 +24,10 @@ public class Workout {
     private LocalDate date;
     private Duration duration;
     private WorkoutType type;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id")
+    private Client client;
+    @ManyToOne
+    @JoinColumn(name = "coach_id")
+    private Coach coach;
 }

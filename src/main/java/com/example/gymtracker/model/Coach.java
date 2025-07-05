@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -24,4 +26,6 @@ public class Coach {
     private Specialization specialization;
     private LocalDate hireDate;  // Дата приема на работу
     private boolean isActive;
+    @OneToMany(mappedBy = "coach")
+    private List<Workout> workouts = new ArrayList<>();
 }
