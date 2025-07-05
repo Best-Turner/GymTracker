@@ -25,7 +25,7 @@ public class Client {
     private Gender gender;
     @Column(name = "birth_date")
     private LocalDate birthDate;
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Workout> workouts = new ArrayList<>();
 }
 

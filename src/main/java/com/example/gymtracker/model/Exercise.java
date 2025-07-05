@@ -6,12 +6,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "exercises")
+@Table(name = "exercise")
 public class Exercise {
 
     @Id
@@ -19,4 +22,6 @@ public class Exercise {
     private Long id;
     private String name;
     private MuscleGroup muscleGroup;
+    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ExerciseSet> sets = new ArrayList<>();
 }

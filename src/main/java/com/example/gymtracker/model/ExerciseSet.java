@@ -18,9 +18,10 @@ public class ExerciseSet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Double weight;
-    private Integer reps;
-    private Workout workout;
-    private Exercise exercises;
+    private Integer reps; //кол-во повторений
+    @ManyToOne
+    @JoinColumn(name = "exercise_id")
+    private Exercise exercise;
 
 }
 
