@@ -15,17 +15,24 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "coaches")
+@Table(name = "coaches",
+        indexes = @Index(name = "ind_coach_name",
+                columnList = "name"))
 public class Coach {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(nullable = false, length = 50)
     private String name;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Specialization specialization;
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private LocalDate hireDate;  // Дата приема на работу
+    @Column(nullable = false)
     private boolean isActive;
-    @OneToMany(mappedBy = "coach")
+    @OneToMany(mappedBy = "coach", fetch = FetchType.LAZY)
     private List<Workout> workouts = new ArrayList<>();
 }

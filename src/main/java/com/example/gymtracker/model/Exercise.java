@@ -14,14 +14,17 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "exercise")
+@Table(name = "exercises")
 public class Exercise {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private MuscleGroup muscleGroup;
-    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ExerciseSet> sets = new ArrayList<>();
+    @ManyToMany(mappedBy = "exercises", fetch = FetchType.LAZY)
+    private List<Workout> workouts = new ArrayList<>();
 }

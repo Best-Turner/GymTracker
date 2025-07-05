@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "sets")
+@Table(name = "exercise_sets")
 public class ExerciseSet {
 
     @Id
@@ -19,9 +19,13 @@ public class ExerciseSet {
     private Long id;
     private Double weight;
     private Integer reps; //кол-во повторений
-    @ManyToOne
-    @JoinColumn(name = "exercise_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "exercise_id", nullable = true)
     private Exercise exercise;
+    @Column(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "workout_id")
+    private Workout workout;
 
 }
 
