@@ -18,13 +18,13 @@ public class ExerciseSet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Double weight;
+    @Column(nullable = false)
     private Integer reps; //кол-во повторений
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "exercise_id", nullable = true)
     private Exercise exercise;
-    @Column(nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "workout_id")
+    @JoinColumn(name = "workout_id", nullable = false)
     private Workout workout;
 
 }

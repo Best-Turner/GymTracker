@@ -28,10 +28,10 @@ public class Coach {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Specialization specialization;
-    @Column(nullable = false)
+    @Column(name = "hire_date",nullable = false)
     @Temporal(TemporalType.DATE)
     private LocalDate hireDate;  // Дата приема на работу
-    @Column(nullable = false)
+    @Column(name = "is_active", nullable = false)
     private boolean isActive;
     @OneToMany(mappedBy = "coach", fetch = FetchType.LAZY)
     private List<Workout> workouts = new ArrayList<>();

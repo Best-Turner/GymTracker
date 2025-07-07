@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS clients(
+    id BIGSERIAL PRIMARY KEY ,
+    name VARCHAR(50) NOT NULL ,
+    gender VARCHAR(10) NOT NULL ,
+    birth_date DATE NOT NULL
+);
