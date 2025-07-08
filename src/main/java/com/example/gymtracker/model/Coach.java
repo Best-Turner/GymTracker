@@ -16,7 +16,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "coaches",
-        indexes = @Index(name = "ind_coach_name",
+        indexes = @Index(name = "idx_coach_name",
                 columnList = "name"))
 public class Coach {
 
