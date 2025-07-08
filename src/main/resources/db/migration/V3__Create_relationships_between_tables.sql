@@ -9,9 +9,10 @@ ALTER TABLE workouts
 
 CREATE TABLE workout_exercise
 (
-    workout_id  BIGINT REFERENCES workouts (id)  NOT NULL,
-    exercise_id BIGINT REFERENCES exercises (id) NOT NULL,
-    PRIMARY KEY (workout_id, exercise_id)
+    workout_id  BIGINT NOT NULL,
+    exercise_id BIGINT NOT NULL,
+    FOREIGN KEY (workout_id) REFERENCES workouts (id) ON DELETE CASCADE,
+    FOREIGN KEY (exercise_id) REFERENCES exercises (id) ON DELETE CASCADE
 );
 
 

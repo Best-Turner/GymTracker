@@ -22,7 +22,7 @@ public class Exercise {
     private Long id;
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
+    @Column(name = "muscle_group",nullable = false)
     @Enumerated(EnumType.STRING)
     private MuscleGroup muscleGroup;
     @ManyToMany(mappedBy = "exercises", fetch = FetchType.LAZY)

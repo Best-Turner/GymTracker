@@ -5,7 +5,18 @@ import java.util.Optional;
 
 public enum MuscleGroup {
 
-    CHEST("Грудные мышцы"), BACK("Спина"), SHOULDERS("Плечи"), BICEPS("Бицепсы"), TRICEPS("Трицепсы"), FOREARMS("Предплечья"), ABS("Пресс"), QUADRICEPS("Четырёхглавая мышца бедра"), HAMSTRINGS("Задняя поверхность бедра"), GLUTES("Ягодичные мышцы"), CALVES("Икры"), NECK("Шея");
+    CHEST("Грудные мышцы"),
+    BACK("Спина"),
+    SHOULDERS("Плечи"),
+    BICEPS("Бицепсы"),
+    TRICEPS("Трицепсы"),
+    FOREARMS("Предплечья"),
+    ABS("Пресс"),
+    QUADRICEPS("Четырёхглавая мышца бедра"),
+    HAMSTRINGS("Задняя поверхность бедра"),
+    GLUTES("Ягодичные мышцы"),
+    CALVES("Икры"),
+    NECK("Шея");
 
     private final String description;
 

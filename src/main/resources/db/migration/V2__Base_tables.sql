@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS exercises
 (
     id          BIGSERIAL PRIMARY KEY,
     name        VARCHAR(128) NOT NULL,
-    muscleGroup VARCHAR(128) NOT NULL
+    muscle_group VARCHAR(128) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS exercise_sets
