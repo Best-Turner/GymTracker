@@ -1,5 +1,6 @@
 package com.example.gymtracker.model;
 
+import com.example.gymtracker.converter.DurationConverter;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,6 +27,7 @@ public class Workout {
     @Temporal(TemporalType.DATE)
     private LocalDate date;
     @Column(nullable = false)
+    @Convert(converter = DurationConverter.class)
     private Duration duration;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
