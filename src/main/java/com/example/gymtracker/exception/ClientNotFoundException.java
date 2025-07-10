@@ -1,6 +1,7 @@
 package com.example.gymtracker.exception;
 
-public class ClientNotFoundException extends RuntimeException{
-    public ClientNotFoundException(String s) {
+public class ClientNotFoundException extends EntityNotFoundException {
+    public ClientNotFoundException(String message) {
+        super(message);
     }
 }
