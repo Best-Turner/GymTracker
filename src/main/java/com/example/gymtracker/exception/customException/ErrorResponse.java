@@ -1,4 +1,4 @@
-package com.example.gymtracker.exception;
+package com.example.gymtracker.exception.customException;
 
 import java.time.Instant;
 

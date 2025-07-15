@@ -29,7 +29,6 @@ public class Coach {
     @Enumerated(EnumType.STRING)
     private Specialization specialization;
     @Column(name = "hire_date",nullable = false)
-    @Temporal(TemporalType.DATE)
     private LocalDate hireDate;  // Дата приема на работу
     @Column(name = "is_active", nullable = false)
     private boolean isActive;

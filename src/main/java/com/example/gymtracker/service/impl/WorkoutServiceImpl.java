@@ -2,10 +2,9 @@ package com.example.gymtracker.service.impl;
 
 import com.example.gymtracker.dto.request.RequestWorkoutDto;
 import com.example.gymtracker.dto.response.ResponseWorkoutDto;
-import com.example.gymtracker.exception.WorkoutNotFoundException;
+import com.example.gymtracker.exception.customException.WorkoutNotFoundException;
 import com.example.gymtracker.mapper.WorkoutMapper;
 import com.example.gymtracker.model.Client;
-import com.example.gymtracker.model.Coach;
 import com.example.gymtracker.model.Workout;
 import com.example.gymtracker.repository.WorkoutRepository;
 import com.example.gymtracker.service.ClientService;

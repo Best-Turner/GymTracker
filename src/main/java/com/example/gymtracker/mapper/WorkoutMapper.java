@@ -45,6 +45,9 @@ public interface WorkoutMapper extends EntityMapper<RequestWorkoutDto, Workout, 
 
     @Named("coachToId")
     default Integer coachToId(Coach coach) {
+        if (coach == null) {
+            return null;
+        }
         return coach.getId();
     }
 

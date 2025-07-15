@@ -1,4 +1,4 @@
-package com.example.gymtracker.exception;
+package com.example.gymtracker.exception.customException;
 
 import com.example.gymtracker.exception.customException.EntityNotFoundException;
 

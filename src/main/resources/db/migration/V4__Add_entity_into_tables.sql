@@ -12,18 +12,18 @@ VALUES ('Денис', 'GENERAL_PHYSICAL_TRAINING', '2020-01-01', true),
        ('Юрий', 'STRENGTH_TRAINING', '2019-02-15', true);
 
 INSERT INTO workouts(date, duration, type, client_id, coach_id)
-VALUES (current_date, '1 hour 45 minutes', 'STRENGTH_TRAINING', 1, 3),
-       ('2025-06-28', '55 minutes', 'ENDURANCE_TRAINING', 1, 2),
-       ('2025-06-26', '30 minutes', 'STRENGTH_TRAINING', 1, 3),
-       ('2025-07-02', '1 hour', 'TACTICAL_TRAINING', 2, 3),
-       ('2025-07-01', '1 hour 30 minutes', ' GENERAL_PHYSICAL_TRAINING', 2, 2),
-       ('2025-07-03', '15 minutes', 'TECHNICAL_TRAINING', 2, 1),
-       ('2025-06-02', '43 minutes', 'GENERAL_PHYSICAL_TRAINING', 3, 1),
-       ('2025-06-15', '20 minutes', 'TECHNICAL_TRAINING', 3, 1),
-       ('2025-06-18', '1 hour 3 minutes', 'SPECIAL_PHYSICAL_TRAINING', 3, 3),
-       ('2025-05-25', '1 hour 50 minutes', 'ENDURANCE_TRAINING', 4, 3),
-       ('2025-05-26', '47 minutes', 'SPEED_STRENGTH_QUALITIES', 4, 1),
-       ('2025-05-27', '1 hour 45 minutes', 'RECOVERY_TRAINING', 5, 1);
+VALUES (current_date, 5220, 'STRENGTH_TRAINING', 1, 3),
+       ('2025-06-28', 1980, 'ENDURANCE_TRAINING', 1, 2),
+       ('2025-06-26', 1080, 'STRENGTH_TRAINING', 1, 3),
+       ('2025-07-02', 3600, 'TACTICAL_TRAINING', 2, 3),
+       ('2025-07-01', 5220, ' GENERAL_PHYSICAL_TRAINING', 2, 2),
+       ('2025-07-03', 540, 'TECHNICAL_TRAINING', 2, 1),
+       ('2025-06-02', 1548, 'GENERAL_PHYSICAL_TRAINING', 3, 1),
+       ('2025-06-15', 720, 'TECHNICAL_TRAINING', 3, 1),
+       ('2025-06-18', 3708, 'SPECIAL_PHYSICAL_TRAINING', 3, 3),
+       ('2025-05-25', 5400, 'ENDURANCE_TRAINING', 4, 3),
+       ('2025-05-26', 1692, 'SPEED_STRENGTH_QUALITIES', 4, 1),
+       ('2025-05-27', 5148, 'RECOVERY_TRAINING', 5, 1);
 
 
 
