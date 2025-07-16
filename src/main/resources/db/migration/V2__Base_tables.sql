@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS workouts
 (
     id       BIGSERIAL PRIMARY KEY,
     date     DATE         NOT NULL,
-    duration INTERVAL     NOT NULL,
+    duration BIGINT     NOT NULL,
     type     VARCHAR(128) NOT NULL
 );
 
