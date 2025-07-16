@@ -1,13 +1,15 @@
 package com.example.gymtracker.mapper;
 
 import com.example.gymtracker.dto.request.RequestWorkoutDto;
-import com.example.gymtracker.dto.response.ResponseWorkoutDto;
+import com.example.gymtracker.dto.response.*;
 import com.example.gymtracker.exception.customException.ValueCastException;
-import com.example.gymtracker.model.Client;
-import com.example.gymtracker.model.Coach;
-import com.example.gymtracker.model.Workout;
-import com.example.gymtracker.model.WorkoutType;
+import com.example.gymtracker.model.*;
 import org.mapstruct.*;
+
+import java.time.Duration;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface WorkoutMapper extends EntityMapper<RequestWorkoutDto, Workout, ResponseWorkoutDto> {
@@ -35,6 +37,16 @@ public interface WorkoutMapper extends EntityMapper<RequestWorkoutDto, Workout, 
     @Mapping(target = "coach", source = "coachId", qualifiedByName = "idToCoach")
     @Mapping(target = "client", source = "clientId", qualifiedByName = "idToClient")
     void updateWorkout(RequestWorkoutDto sourceWorkout, @MappingTarget Workout workout);
+
+    @Mapping(target = "duration", source = "duration", qualifiedByName = "durationToString")
+    @Mapping(target = "type", source = "type", qualifiedByName = "typeToString")
+    @Mapping(target = "exercises", expression = "java(mapExercisesToShort(workout.getExercises()))")
+    ResponseWorkoutWithExercise toWorkoutWithExercise(Workout workout);
+
+    @Mapping(target = "duration", source = "duration", qualifiedByName = "durationToString")
+    @Mapping(target = "type", source = "type", qualifiedByName = "typeToString")
+    @Mapping(target = "exercises", expression = "java(mapExerciseToExerciseWithSets(workout))")
+    ResponseWorkoutFull toWorkoutFull(Workout workout);
 
     @Named("idToCoach")
     default Coach idToCoach(Integer coachId) {
@@ -68,5 +80,46 @@ public interface WorkoutMapper extends EntityMapper<RequestWorkoutDto, Workout, 
         Client client = new Client();
         client.setId(clientId);
         return client;
+    }
+
+    @Named("durationToString")
+    default String durationToString(Duration duration) {
+        if (duration == null) {
+            return null;
+        }
+        long hours = duration.toHours();
+        long minutes = duration.toMinutes() % 60;
+        long seconds = duration.getSeconds() % 60;
+        return String.format("%d:%02d:%02d", hours, minutes, seconds);
+    }
+
+    default List<ExerciseShortResponse> mapExercisesToShort(List<Exercise> exercises) {
+        return exercises.stream()
+                .map(ex -> new ExerciseShortResponse(
+                        ex.getId(),
+                        ex.getName(),
+                        ex.getMuscleGroup().getDescription()))
+                .toList();
+    }
+
+    default List<ExerciseWithSetsResponse> mapExerciseToExerciseWithSets(Workout workout) {
+        Map<Long, List<ExerciseSet>> setsByExerciseId = workout.getExerciseSets().stream()
+                .collect(Collectors.groupingBy(es -> es.getExercise().getId()));
+        return workout.getExercises().stream()
+                .map(exercise -> new ExerciseWithSetsResponse(
+                        exercise.getId(),
+                        exercise.getName(),
+                        exercise.getMuscleGroup().getDescription(),
+                        mapExerciseSetToShort(setsByExerciseId.get(exercise.getId()))))
+                .toList();
+    }
+
+    default List<ExerciseSetShortResponse> mapExerciseSetToShort(List<ExerciseSet> exerciseSets) {
+        return exerciseSets.stream()
+                .map(exerciseSet -> new ExerciseSetShortResponse(
+                        exerciseSet.getId(),
+                        exerciseSet.getWeight(),
+                        exerciseSet.getReps()))
+                .toList();
     }
 }

@@ -1,7 +1,5 @@
 package com.example.gymtracker.dto.response;
 
-import com.example.gymtracker.model.WorkoutType;
-
 import java.time.Duration;
 import java.time.LocalDate;
 

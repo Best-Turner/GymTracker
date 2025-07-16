@@ -2,8 +2,6 @@ package com.example.gymtracker.converter;
 
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
-import org.postgresql.util.PGInterval;
-import org.postgresql.util.PGobject;
 
 import java.time.Duration;
 
