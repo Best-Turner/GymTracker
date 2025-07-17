@@ -18,6 +18,7 @@ public interface WorkoutMapper extends EntityMapper<RequestWorkoutDto, Workout, 
     @Override
     @Mapping(source = "type", target = "type", qualifiedByName = "typeToString")
     @Mapping(source = "coach", target = "coachId", qualifiedByName = "coachToId")
+    @Mapping(target = "duration", source = "duration", qualifiedByName = "durationToString")
     ResponseWorkoutDto toDto(Workout workout);
 
     @Override
@@ -27,8 +28,8 @@ public interface WorkoutMapper extends EntityMapper<RequestWorkoutDto, Workout, 
     @Mapping(source = "type", target = "type", qualifiedByName = "stringToType")
     @Mapping(target = "coach", source = "coachId", qualifiedByName = "idToCoach")
     @Mapping(target = "client", source = "clientId", qualifiedByName = "idToClient")
+    @Mapping(target = "duration", expression = "java(mapLongToDuration(requestWorkoutDto.duration()))")
     Workout toEntity(RequestWorkoutDto requestWorkoutDto);
-
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "exercises", ignore = true)
@@ -121,5 +122,9 @@ public interface WorkoutMapper extends EntityMapper<RequestWorkoutDto, Workout, 
                         exerciseSet.getWeight(),
                         exerciseSet.getReps()))
                 .toList();
+    }
+
+    default Duration mapLongToDuration(Long seconds) {
+        return Duration.ofSeconds(seconds);
     }
 }
