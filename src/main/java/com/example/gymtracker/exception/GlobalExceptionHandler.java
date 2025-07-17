@@ -1,5 +1,6 @@
 package com.example.gymtracker.exception;
 
+import com.example.gymtracker.exception.customException.AccessDeniedException;
 import com.example.gymtracker.exception.customException.EntityNotFoundException;
 import com.example.gymtracker.exception.customException.ErrorResponse;
 import com.example.gymtracker.exception.customException.ValueCastException;
@@ -25,5 +26,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleValueInvalid(ValueCastException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(new ErrorResponse("Invalid value", ex.getMessage(), Instant.now()));
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ErrorResponse> handleValueInvalid(AccessDeniedException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponse("Forbidden", ex.getMessage(), Instant.now()));
     }
 }

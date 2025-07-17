@@ -15,12 +15,16 @@ public interface WorkoutRepository extends JpaRepository<Workout, Long> {
 
     @Query("SELECT DISTINCT w FROM Workout w " +
            "LEFT JOIN FETCH w.exercises e " +
-           "WHERE w.client.id = :clientId")
-    List<Workout> findWithExercisesByClientId(@Param("clientId") Long clientId);
+           "WHERE w.client.id = :clientId AND w.id=:workoutId")
+    Workout findWithExercisesByClientId(@Param("clientId") Long clientId, Long workoutId);
 
-    @Query("SELECT DISTINCT w FROM Workout w " +
+    Workout getWorkoutByClientIdAndId(Long clientId, Long id);
+
+
+    @Query("SELECT w FROM Workout w " +
            "LEFT JOIN FETCH w.exercises e " +
            "LEFT JOIN FETCH w.exerciseSets es " +
-           "WHERE w.client.id = :clientId")
-    List<Workout> findWithExerciseAndExerciseSetsByClientId(@Param("clientId") Long clientId);
+           "WHERE w.client.id = :clientId AND w.id = :workoutId")
+    Workout findWithExerciseAndExerciseSetsByClientIdAndWorkoutId(@Param("clientId") Long clientId,
+                                                                        @Param("workoutId") Long workoutId);
 }
