@@ -36,7 +36,12 @@ public interface WorkoutMapper extends EntityMapper<RequestWorkoutDto, Workout, 
     @Mapping(target = "exerciseSets", ignore = true)
     @Mapping(source = "type", target = "type", qualifiedByName = "stringToType")
     @Mapping(target = "coach", source = "coachId", qualifiedByName = "idToCoach")
-    @Mapping(target = "client", source = "clientId", qualifiedByName = "idToClient")
+    /* не работает при обновлении в методе PutMapping класса ClientWorkoutService
+    получается ошибка - Client который приходит из этого mapper находится в состоянии transient
+     */
+    //@Mapping(target = "client", source = "clientId", qualifiedByName = "idToClient")
+    //попробуем игнорировать
+    @Mapping(target = "client", ignore = true)
     void updateWorkout(RequestWorkoutDto sourceWorkout, @MappingTarget Workout workout);
 
     @Mapping(target = "duration", source = "duration", qualifiedByName = "durationToString")
@@ -51,6 +56,9 @@ public interface WorkoutMapper extends EntityMapper<RequestWorkoutDto, Workout, 
 
     @Named("idToCoach")
     default Coach idToCoach(Integer coachId) {
+        if (coachId == null) {
+            return null;
+        }
         Coach coach = new Coach();
         coach.setId(coachId);
         return coach;

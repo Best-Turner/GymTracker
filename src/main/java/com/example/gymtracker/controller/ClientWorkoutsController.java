@@ -22,9 +22,9 @@ public class ClientWorkoutsController {
 
 
     @GetMapping
-    public ResponseEntity<List<ResponseWorkoutDto>> getWorkoutsByClientId(@PathVariable Long clientId) {
+    public ResponseEntity<List<ResponseWorkoutDto>> clientWorkouts(@PathVariable Long clientId) {
         return ResponseEntity.ok()
-                .body(clientWorkoutService.workoutsByClientId(clientId));
+                .body(clientWorkoutService.clientWorkouts(clientId));
     }
 
     @GetMapping("/{workoutId}")
@@ -34,11 +34,11 @@ public class ClientWorkoutsController {
 
         return switch (detail) {
             case "full" -> ResponseEntity.ok()
-                    .body(clientWorkoutService.workoutFullByClientIdAndWorkoutId(clientId, workoutId));
+                    .body(clientWorkoutService.clientWorkoutFullById(clientId, workoutId));
             case "exercise" -> ResponseEntity.ok()
-                    .body(clientWorkoutService.workoutWithExerciseByClientIdAndWorkoutId(clientId, workoutId));
+                    .body(clientWorkoutService.clientWorkoutWithExerciseById(clientId, workoutId));
             default -> ResponseEntity.ok()
-                    .body(clientWorkoutService.workoutsByClientId(clientId));
+                    .body(clientWorkoutService.clientWorkoutById(clientId, workoutId));
         };
     }
 
@@ -48,7 +48,7 @@ public class ClientWorkoutsController {
                                                             @RequestBody RequestWorkoutDto requestWorkoutDto) {
         ResponseWorkoutDto createdWorkout = clientWorkoutService.createWorkout(clientId, requestWorkoutDto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/id")
+                .path("/{id}")
                 .buildAndExpand(createdWorkout.id())
                 .toUri();
         return ResponseEntity.created(location).body(createdWorkout);
@@ -65,13 +65,13 @@ public class ClientWorkoutsController {
     public ResponseEntity<ResponseWorkoutDto> updateClientWorkout(@PathVariable("workoutId") Long workoutId,
                                                                   @PathVariable("clientId") Long clientId,
                                                                   @RequestBody RequestWorkoutDto requestWorkoutDto) {
-        return ResponseEntity.ok(clientWorkoutService.updateWorckout(clientId, workoutId, requestWorkoutDto));
+        return ResponseEntity.ok(clientWorkoutService.updateWorkout(clientId, workoutId, requestWorkoutDto));
     }
 
     @PatchMapping(value = "/{workoutId}", consumes = "application/json")
-    public ResponseEntity<ResponseWorkoutDto> updateClientWorkout(@PathVariable("workoutId") Long workoutId,
+    public ResponseEntity<ResponseWorkoutDto> patchClientWorkout(@PathVariable("workoutId") Long workoutId,
                                                                   @PathVariable("clientId") Long clientId,
-                                                                  Map<String, Object> updates) {
-        return ResponseEntity.ok(clientWorkoutService.patchWorckout(clientId, workoutId, updates));
+                                                                  @RequestBody Map<String, Object> updates) {
+        return ResponseEntity.ok(clientWorkoutService.patchWorkout(clientId, workoutId, updates));
     }
 }
