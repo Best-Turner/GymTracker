@@ -3,7 +3,7 @@ package com.example.gymtracker.controller;
 import com.example.gymtracker.dto.request.RequestExerciseSetDto;
 import com.example.gymtracker.dto.response.ExerciseSetDetailsResponse;
 import com.example.gymtracker.dto.response.ExerciseSetShortResponse;
-import com.example.gymtracker.mapper.ExerciseSetMapper;
+import com.example.gymtracker.service.ClientWorkoutExerciseSetsService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,7 +23,6 @@ public class ClientWorkoutExerciseSetController {
 
 
     private final ClientWorkoutExerciseSetsService clientWorkoutExerciseSetsService;
-    private final ExerciseSetMapper mapper;
 
 
     @GetMapping
@@ -52,7 +51,7 @@ public class ClientWorkoutExerciseSetController {
                                                                       @PathVariable("workoutId") Long workoutId,
                                                                       @RequestBody RequestExerciseSetDto exerciseSetDto) {
         ExerciseSetShortResponse exerciseSetShortResponse =
-                clientWorkoutExerciseSetsService.create(clientId, workoutId, exerciseSetDto);
+                clientWorkoutExerciseSetsService.createExerciseSet(clientId, workoutId, exerciseSetDto);
 
         URI uriLocation = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{exerciseSetId}")
@@ -68,7 +67,7 @@ public class ClientWorkoutExerciseSetController {
                                   @PathVariable("workoutId") Long workoutId,
                                   @PathVariable("exerciseSetId") Long exerciseSetId,
                                   @RequestBody RequestExerciseSetDto requestExerciseSetDto) {
-        clientWorkoutExerciseSetsService.update(clientId, workoutId, exerciseSetId, requestExerciseSetDto);
+        clientWorkoutExerciseSetsService.updateExerciseSet(clientId, workoutId, exerciseSetId, requestExerciseSetDto);
     }
 
     @PatchMapping(value = "/{exerciseSetId}", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -76,8 +75,8 @@ public class ClientWorkoutExerciseSetController {
     public void patchExerciseSet(@PathVariable("clientId") Long clientId,
                                  @PathVariable("workoutId") Long workoutId,
                                  @PathVariable("exerciseSetId") Long exerciseSetId,
-                                 @RequestBody Map<String, Object> detail) {
-        clientWorkoutExerciseSetsService.patch(clientId, workoutId, exerciseSetId, detail);
+                                 @RequestBody Map<String, Object> updates) {
+        clientWorkoutExerciseSetsService.patchExerciseSet(clientId, workoutId, exerciseSetId, updates);
     }
 }
 
