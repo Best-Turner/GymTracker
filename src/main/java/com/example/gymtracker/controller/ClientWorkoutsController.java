@@ -70,8 +70,8 @@ public class ClientWorkoutsController {
 
     @PatchMapping(value = "/{workoutId}", consumes = "application/json")
     public ResponseEntity<ResponseWorkoutDto> patchClientWorkout(@PathVariable("workoutId") Long workoutId,
-                                                                  @PathVariable("clientId") Long clientId,
-                                                                  @RequestBody Map<String, Object> updates) {
+                                                                 @PathVariable("clientId") Long clientId,
+                                                                 @RequestBody Map<String, Object> updates) {
         return ResponseEntity.ok(clientWorkoutService.patchWorkout(clientId, workoutId, updates));
     }
 }

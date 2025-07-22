@@ -54,6 +54,8 @@ public interface WorkoutMapper extends EntityMapper<RequestWorkoutDto, Workout, 
     @Mapping(target = "exercises", expression = "java(mapExerciseToExerciseWithSets(workout))")
     ResponseWorkoutFull toWorkoutFull(Workout workout);
 
+
+
     @Named("idToCoach")
     default Coach idToCoach(Integer coachId) {
         if (coachId == null) {
