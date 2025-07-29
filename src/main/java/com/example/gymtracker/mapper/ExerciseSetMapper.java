@@ -18,11 +18,11 @@ public interface ExerciseSetMapper extends EntityMapper<RequestExerciseSetDto, E
     @Override
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "workout", ignore = true)
-    @Mapping(source = "exerciseId", target = "exercise", expression = "java(idToExercise(exerciseSetDto.exerciseId()))")
+    @Mapping(target = "exercise", expression = "java(idToExercise(exerciseSetDto.exerciseId()))")
     ExerciseSet toEntity(RequestExerciseSetDto exerciseSetDto);
 
     @Mapping(source = "exercise", target = "exerciseName", qualifiedByName = "exerciseToExerciseName")
-    @Mapping(source = "exercise", target = "muscleGroup", expression = "java(exerciseToString(exerciseSet.exercise()))")
+    @Mapping(target = "muscleGroup", expression = "java(exerciseToString(exerciseSet.getExercise()))")
     @Mapping(target = "workoutId", expression = "java(workoutToId(exerciseSet.getWorkout()))")
     ExerciseSetDetailsResponse toDetailsEntity(ExerciseSet exerciseSet);
 
@@ -40,8 +40,7 @@ public interface ExerciseSetMapper extends EntityMapper<RequestExerciseSetDto, E
     }
 
     @Named("exerciseToExerciseName")
-    default String exerciseToExerciseName(ExerciseSet exerciseSet) {
-        Exercise exercise = exerciseSet.getExercise();
+    default String exerciseToExerciseName(Exercise exercise) {
         return exercise == null ? "<< не указано >>" : exercise.getName();
     }
 
